@@ -1,0 +1,49 @@
+# Save as:  /etc/systemd/system/my-service.service
+#
+# Then, tell systemd to reload its configuration:
+#   sudo systemctl daemon-reload
+#
+# Start your service right now:
+#   sudo systemctl start my-service
+#
+# If that works, enable your service to start at boot:
+#   sudo systemctl enable my-service
+#
+# You can use any name instead of "my-service" of course.
+ 
+ 
+[Unit]
+ 
+Description=Configure mesh0 dev node
+ 
+# It may be necessary to include dependencies to prevent the script from
+# running too early during boot.
+ 
+# For example, if you need networking, you probably want:
+ 
+# If you need stuff in /dev, you probably want:
+#Wants=bb-wl18xx-wlan0.service
+After=bb-wl18xx-wlan0.service
+After=wpa_supplicant.service
+ 
+ 
+[Install]
+ 
+# When enabled, start service at boot
+WantedBy=multi-user.target
+ 
+ 
+[Service]
+ 
+# If your script just does some setup and then exits, use Type=oneshot
+# To create a service that remains running, use Type=simple
+Type=simple
+ 
+# By default the service runs as root, but you can choose a different user:
+User=root
+ 
+# By default the service runs in /, but you can choose a different working dir:
+WorkingDirectory=/home/debian
+ 
+# Program to run (absolute path required):
+ExecStart=/root/tools/mesh_script/mesh_start.sh 
