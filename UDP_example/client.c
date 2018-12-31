@@ -19,6 +19,18 @@ int main(int argc, char **argv)
 	char recv_buff[BUFFER_LEN] = { 0 };
 	int recv_len = 0;
 	char send_buff[BUFFER_LEN] = { 0 };
+	
+	char *server_ip = &agrv[1];
+	if(argc < 2)
+	{
+		printf("Usage: client server_id\n");
+		
+		return 1;
+	}
+	else
+	{
+		printf("server ip: %s\n", server_ip);
+	}
 
 	printf("CLIENT\n");
 
