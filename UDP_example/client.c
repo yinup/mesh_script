@@ -20,7 +20,10 @@ int main(int argc, char **argv)
 	int recv_len = 0;
 	char send_buff[BUFFER_LEN] = { 0 };
 	
-	char *server_ip = &agrv[1];
+	unsigned int server_port_num = SERVER_PORT;
+	unsigned int client_port_num = CLIENT_PORT;
+
+	char *server_ip = argv[1];
 	if(argc < 2)
 	{
 		printf("Usage: client server_id\n");
@@ -39,11 +42,11 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 	/// Setup server addr struct
-	if (setup_sockaddr_in(&server_addr, SERVER_PORT, SERVER_IP) == NULL) {
+	if (setup_sockaddr_in(&server_addr, &server_port_num, server_ip) == NULL) {
 		return (-1);
 	}
 	/// Setup client addr struct
-	if (setup_sockaddr_in(&client_addr, CLIENT_PORT, NULL) == NULL) {
+	if (setup_sockaddr_in(&client_addr, &client_port_num, NULL) == NULL) {
 		return (-1);
 	}
 	/// Bind CLIENT_PORT to address structure on sockfd

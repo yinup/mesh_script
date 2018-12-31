@@ -20,17 +20,18 @@ int main(int argc, char **argv)
 	int recv_len = 0;
 	char send_buff[BUFFER_LEN] = { 0 };
 
+	unsigned int port_num = SERVER_PORT;
+
 	printf("SERVER\n");
 
-	/// Setup socket
 	if (setup_socket(&sockfd) < 0) {
 		return (-1);
 	}
-	/// Setup server addr struct
-	if (setup_sockaddr_in(&server_addr, SERVER_PORT, SERVER_IP) == NULL) {
+
+	if (setup_sockaddr_in(&server_addr, &port_num, SERVER_IP) == NULL) {
 		return (-1);
 	}
-	/// Bind SERVER_PORT to address structure on sockfd
+
 	if (bind_socket(sockfd, &server_addr)) {
 		return (-1);
 	}
