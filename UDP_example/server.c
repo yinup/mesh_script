@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 		return (-1);
 	}
 
-	if (setup_sockaddr_in(&server_addr, &port_num, SERVER_IP) == NULL) {
+	if (setup_sockaddr_in(&server_addr, &port_num, NULL) == NULL) {
 		return (-1);
 	}
 
