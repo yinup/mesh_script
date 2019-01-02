@@ -16,9 +16,9 @@ ifconfig wlan0 down
 ifconfig mesh0 up
 ip addr add ${ip_address} dev mesh0
 
-/home/debian/project/OONF/build/olsrd2_static -l /root/tools/mesh_script/olsrd.conf mesh0  > /root/olsr2.log 2>&1 &
+#Enable olsrd
+/usr/sbin/olsrd -i mesh0 > /dev/null 2>&1
 
-/root/tools/mesh_script/UDP_example/server > /root/server_test.log 2>&1 &
 
 
 
